@@ -1,5 +1,14 @@
 version: '3.7'
 services:
+    auth:
+        build:
+            context: ./auth
+            target: DEV
+        ports:
+            - "3000:3000"
+        networks:
+            - orange
+
     zecq:
         build:
             context: ./zecq
