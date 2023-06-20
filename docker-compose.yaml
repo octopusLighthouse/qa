@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+    zecq:
+        build:
+            context: ./zecq
+            target: DEV
+        ports: 
+            - "5000:5000"
+        networks:
+            - orange
+
+
+networks:
+    orange:
+        driver: bridge

@@ -1,0 +1,1 @@
+from user.user_controller import blp as UserBlueprint
