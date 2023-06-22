@@ -1,3 +1,15 @@
+.murza {
+  background-color:antiquewhite;
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: #213547;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
