@@ -1,11 +1,23 @@
 version: '3.7'
 services:
+    dashboard:
+        build:
+            context: ./dashboard
+            target: DEV
+        ports:
+            - "80:80"
+
     auth:
         build:
             context: ./auth
             target: DEV
         ports:
             - "3000:3000"
+        environment: 
+            - DATABASE_HOST=127.0.0.1
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=postgres  
         networks:
             - orange
 
@@ -15,6 +27,8 @@ services:
             target: DEV
         ports: 
             - "5000:5000"
+        environment: 
+            - DATABASE_URL=
         networks:
             - orange
 
