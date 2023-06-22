@@ -1,7 +1,7 @@
 from flask.views import MethodView
-from scenarios_repository import ScenarioSchema, ScenarioModel
+from .scenarios_repository import ScenarioSchema, ScenarioModel
 from flask_smorest import abort, Blueprint
-from zecq.scenarios.scenarios_service import ScenarioService
+from .scenarios_service import ScenarioService
 
 blp = Blueprint("scenarios", __name__, description="Operations on scenarios")
 
