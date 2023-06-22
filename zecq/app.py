@@ -6,9 +6,7 @@ from dotenv import load_dotenv
 
 from scenarios import ScenarioBlueprint
 from user import UserBlueprint
-from flask_jwt_extended import JWTManager
 import secrets
-from blocklist import BLOCKLIST
 from flask_migrate import Migrate
 
 def create_app():
@@ -29,35 +27,6 @@ def create_app():
     migrate = Migrate(app, db)
 
     api = Api(app)
-
-    app.config["JWT_SECRET_KEY"] = str(secrets.SystemRandom().getrandbits(128))
-    jwt = JWTManager(app)
-
-    @jwt.additional_claims_loader
-    def add_claims_to_jwt(identity):
-        if identity == 1:
-            return {"is_admin": True}
-        return {"is_admin": False}
-
-    @jwt.expired_token_loader
-    def expired_token_callback(jwt_header, jwt_payload):
-        return (
-            jsonify({"message": "The token has expired.", "error": "token_expired"}),
-            401,
-        )
-
-    @jwt.token_in_blocklist_loader
-    def check_if_token_in_blocklist(jwt_header, jwt_payload):
-        return jwt_payload["jti"] in BLOCKLIST
-
-    @jwt.revoked_token_loader
-    def revoked_token_callback(jwt_header, jwt_payload):
-        return (
-            jsonify(
-                {"description": "The token has been revoked.", "error": "token_revoked"}
-            ),
-            401,
-        )
 
     api.register_blueprint(ScenarioBlueprint)
     api.register_blueprint(UserBlueprint)
