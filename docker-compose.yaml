@@ -15,10 +15,7 @@ services:
             - "3000:3000"
 
         environment: 
-            - DATABASE_HOST=127.0.0.1
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-            - POSTGRES_DB=postgres  
+            - TEST=true
         networks:
             - orange
 
