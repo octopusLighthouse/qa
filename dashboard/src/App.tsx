@@ -6,12 +6,28 @@ import {
 
 import "./index.css";
 
-let router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
-    loader: () => ({ message: "Hello you use CQA dashboard!s!" }),
+    loader: () => ({ message: "Hello you use CQA dashboard!" }),
     Component() {
-      let data = useLoaderData() as { message: string };
+      const data = useLoaderData() as { message: string };
+      return <div className="murza">{data.message}</div>;
+    },
+  },
+  {
+    path: "/register",
+    loader: () => ({ message: "Register!" }),
+    Component() {
+      const data = useLoaderData() as { message: string };
+      return <div className="murza">{data.message}</div>;
+    },
+  },
+  {
+    path: "/login",
+    loader: () => ({ message: "Login!" }),
+    Component() {
+      const data = useLoaderData() as { message: string };
       return <div className="murza">{data.message}</div>;
     },
   },
