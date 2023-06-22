@@ -1,10 +1,10 @@
 import {
   createBrowserRouter,
   RouterProvider,
-  useLoaderData,
   Link,
 } from "react-router-dom";
 import "./index.css";
+import axios from 'axios';
 
 function NoMatch() {
   return (
@@ -37,7 +37,7 @@ function Home() {
 
 function Login() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    //event.preventDefault();
+    event.preventDefault();
 
     //let formData = new FormData(event.currentTarget);
     //let username = formData.get("username") as string;
@@ -87,11 +87,12 @@ function Login() {
 }
 
 function Register() {
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    //event.preventDefault();
+  const  handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-    //let formData = new FormData(event.currentTarget);
-    //let username = formData.get("username") as string;
+    let formData = new FormData(event.currentTarget);
+    let username = formData.get("username") as string;
+    let password = formData.get("password") as string;
 
     // auth.signin(username, () => {
     //   // Send them back to the page they tried to visit when they were
@@ -102,6 +103,15 @@ function Register() {
     //   // user experience.
     //   navigate(from, { replace: true });
     // });
+    try {
+      const response = await axios.post('http://localhost:3000/auth', { 
+        username,
+        password,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (

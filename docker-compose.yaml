@@ -6,6 +6,8 @@ services:
             target: DEV
         ports:
             - "80:80"
+        networks:
+            - orange
 
     auth:
         build:
