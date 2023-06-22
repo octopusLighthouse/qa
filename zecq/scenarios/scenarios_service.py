@@ -1,4 +1,4 @@
-from scenarios_repository import ScenarioModel
+from zecq.scenarios.scenarios_repository import ScenarioModel
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from flask import jsonify
 from flask_smorest import abort

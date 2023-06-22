@@ -1,7 +1,7 @@
 from flask_smorest import abort, Blueprint
 from flask.views import MethodView
 from user_repository import UserSchema
-from user_service import UserService
+from zecq.user.user_service import UserService
 
 blp = Blueprint("users", __name__, description="Operations on users")
 

@@ -1,1 +1,1 @@
-from user_controller import blp as UserBlueprint
+from zecq.user.user_controller import blp as UserBlueprint
