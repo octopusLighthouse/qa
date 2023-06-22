@@ -1,4 +1,4 @@
-from user_repository import UserModel
+from zecq.user.user_repository import UserModel
 from zecq.db import db
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from flask_smorest import abort
