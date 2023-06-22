@@ -1,1 +1,1 @@
-from zecq.scenarios.scenarios_controller import blp as ScenarioBlueprint
+from .scenarios_controller import blp as ScenarioBlueprint

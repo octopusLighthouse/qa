@@ -1,6 +1,6 @@
-from zecq.db import db
+from db import db
 from marshmallow import Schema, fields
-from zecq.scenarios.scenarios_repository import PlainScenarioSchema
+from scenarios.scenarios_repository import PlainScenarioSchema
 
 class UserModel(db.Model):
     __tablename__ = "users"
