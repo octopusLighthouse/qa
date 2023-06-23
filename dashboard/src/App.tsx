@@ -5,7 +5,8 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import axios from 'axios';
-import { Settings } from "./components/Settings";
+import React, { useEffect, useState } from 'react';
+import { Settings } from "./containers/Settings";
 
 function NoMatch() {
   return (
@@ -37,6 +38,7 @@ function Home() {
 }
 
 function Login() {
+  const [data, setData] = useState('');
   const  handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let formData = new FormData(event.currentTarget);
@@ -49,6 +51,7 @@ function Login() {
         password,
       });
       console.log(response.data);
+      setData(response.data.token);
     } catch (error) {
       console.error(error);
     }
@@ -80,6 +83,12 @@ function Login() {
           <div className="empty" />
           <div className="row-box">
             <button type="submit">Login</button>
+          </div>
+          <div className="empty" />
+          <div className="row-box">
+            <label>
+              Token (you will get it after login): <input name="token" type="text" readOnly value={data} />
+            </label>
           </div>
         </div>
       </form>
