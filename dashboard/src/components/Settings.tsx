@@ -11,7 +11,7 @@ export function Settings() {
       const email = formData.get("email") as string;
   
       try {
-        const response = await axios.post('http://localhost:3000/api/v1/settings', { 
+        const response = await axios.post('http://localhost:3000/api/v1/scenarios', { 
           url,
           period,
           acceptance: {

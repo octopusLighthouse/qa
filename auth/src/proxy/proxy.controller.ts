@@ -42,9 +42,10 @@ export class ProxyController {
 
   @Get('*')
   async proxyGetRequest(@Req() req: Request, @Res() res: Response) {
-    const { method, url, headers, body } = req;
-    const innerUrl = `http://zecq:5000/${url.substring(8, url.length-8)}`;
-    console.log(`InnerUrl: ${innerUrl}`);
+    const { method, url, headers } = req;
+    const prefix = "/api/v1/";
+    const innerUrl = `http://zecq:5000/${url.substring(prefix.length)}`;
+    console.log(`InnerUrl: ${innerUrl}, url: ${url}`);
     try {
       const response = await axios.get(innerUrl, { headers: headers });
       return response.data;
@@ -56,8 +57,9 @@ export class ProxyController {
   @Post('*')
   async proxyPostRequest(@Req() req: Request, @Res() res: Response) {
     const { method, url, headers, body } = req;
-    const innerUrl = `http://zecq:5000/${url.substring(8, url.length-8)}`;
-    console.log(`InnerUrl: ${innerUrl}`);
+    const prefix = "/api/v1/";
+    const innerUrl = `http://zecq:5000/${url.substring(prefix.length)}`;
+    console.log(`InnerUrl: ${innerUrl}, url: ${url}`);
     try {
       const response = await axios.post(innerUrl, body, { headers: headers });
       return response.data;
