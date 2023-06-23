@@ -11,7 +11,7 @@ class ScenarioModel(db.Model):
     url = db.Column(db.String, nullable=False)
     period = db.Column(db.Integer, nullable=False)
     acceptance_time = db.Column(db.Integer, nullable=False)
-    email = db.Column(db.String, nullable=False)
+    email = db.Column(db.String)
     phone = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
@@ -23,7 +23,7 @@ class PlainScenarioSchema(Schema):
     url = fields.Str(required=True)
     period = fields.Int(required=True)
     acceptance_time = fields.Int(required=True)
-    email = fields.String(required=True)
+    email = fields.String()
     phone = fields.String()
     created_at = fields.String(dump_only=True)
 

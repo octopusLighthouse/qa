@@ -2,28 +2,26 @@ from flask_smorest import abort, Blueprint
 from flask.views import MethodView
 from .user_repository import UserSchema
 from .user_service import UserService
+import requests
 
 blp = Blueprint("users", __name__, description="Operations on users")
+AUTHENTICATION_SERVICE_URL = "http://localhost:3000/auth/123"
+
+
+def get_permission_status():
+    response = requests.get(AUTHENTICATION_SERVICE_URL)
+    if response.status_code == 200:
+        permission_status = response.json()["permision"]
+        return permission_status
+    else:
+        abort(500, message="Failed to retrieve permission status from authentication service")
+
 
 @blp.before_request
 def handle_authentication():
-    permission_status = {"permission": "allowed"}
+    permission_status = get_permission_status()
     if permission_status["permission"] == "denied":
-        abort(403, message="Permission not granted")
-# @blp.route("/register")
-# class UserRegister(MethodView):
-#     @blp.arguments(UserSchema)
-#
-#     def post(self, user_data):
-#         user = UserService.register(user_data)
-#         return user
-
-# @blp.route("/login")
-# class UserLogin(MethodView):
-#     @blp.arguments(UserSchema)
-#     def post(self, user_data):
-#         login = UserService.login(user_data)
-#         return login
+        abort(403, message="Permission denied")
 
 
 @blp.route("/user/<int:user_id>")
