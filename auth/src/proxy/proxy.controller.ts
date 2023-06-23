@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Headers } from '@nestjs/common';
 import { ProxyService } from './proxy.service';
 import { CreateProxyDto } from './dto/create-proxy.dto';
 import { UpdateProxyDto } from './dto/update-proxy.dto';
@@ -9,11 +9,14 @@ export class ProxyController {
   constructor(private readonly proxyService: ProxyService) {}
 
   @Post('settings')
-  async create(@Body() data: any) {
+  async create(
+    @Headers('token') token: string,
+    @Body() data: any) {
     try {
+      console.log(` data ${JSON.stringify(data)}, token: ${token}`);
       const response = await axios.post('http://zecq:5000/settings', data, {
         headers: {
-          token: 123,
+          token,
         },
       });
       return response.data;
