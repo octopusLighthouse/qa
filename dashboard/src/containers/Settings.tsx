@@ -39,7 +39,7 @@ export function Settings() {
         <form onSubmit={handleSubmit}>          
         <div className="column-box">
         <div className="row-box">
-            Token (for testing purposes, copy it from login (sign-in) window): <input name="token" type="text" />
+            Token (for testing purposes, copy it from login (sign-in) window): <input name="token" type="text" size={200} />
           </div>
           <div className="row-box">
             url: <input name="url" type="text" />

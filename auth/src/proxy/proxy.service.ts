@@ -1,26 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProxyDto } from './dto/create-proxy.dto';
 import { UpdateProxyDto } from './dto/update-proxy.dto';
+import axios from 'axios';
 
 @Injectable()
 export class ProxyService {
-  create(createProxyDto: CreateProxyDto) {
-    return 'This action adds a new proxy';
+  async get(url: string, headers) {
+    try {
+      const response = await axios.get(url, { headers: headers });
+      return response.data;
+    } catch (error) {
+      throw new Error(``);
+    }
   }
 
-  findAll() {
-    return `This action returns all proxy`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} proxy`;
-  }
-
-  update(id: number, updateProxyDto: UpdateProxyDto) {
-    return `This action updates a #${id} proxy`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} proxy`;
+  async post(url: string, data, headers) {
+    try {
+      const response = await axios.post(url, data, { headers: headers });
+      return response.data;
+    } catch (error) {
+      throw new Error(``);
+    }
   }
 }
