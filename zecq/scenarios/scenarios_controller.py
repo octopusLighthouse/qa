@@ -4,8 +4,12 @@ from flask_smorest import abort, Blueprint
 from .scenarios_service import ScenarioService
 
 blp = Blueprint("scenarios", __name__, description="Operations on scenarios")
-
-@blp.route("/settings")
+@blp.before_request
+def handle_authentication():
+    permission_status = {"permission": "allowed"}
+    if permission_status["permission"] == "denied":
+        abort(403, message="Permission not granted")
+@blp.route("/scenarios")
 class Scenarios(MethodView):
     @blp.arguments(ScenarioSchema)
     @blp.response(200, ScenarioSchema)
@@ -14,7 +18,7 @@ class Scenarios(MethodView):
         return updated_settings
 
 
-@blp.route("/settings")
+@blp.route("/scenarios")
 class SettingsList(MethodView):
     @blp.response(200, ScenarioSchema(many=True))
     def get(self):

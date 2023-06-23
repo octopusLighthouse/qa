@@ -5,20 +5,25 @@ from .user_service import UserService
 
 blp = Blueprint("users", __name__, description="Operations on users")
 
-@blp.route("/register")
-class UserRegister(MethodView):
-    @blp.arguments(UserSchema)
+@blp.before_request
+def handle_authentication():
+    permission_status = {"permission": "allowed"}
+    if permission_status["permission"] == "denied":
+        abort(403, message="Permission not granted")
+# @blp.route("/register")
+# class UserRegister(MethodView):
+#     @blp.arguments(UserSchema)
+#
+#     def post(self, user_data):
+#         user = UserService.register(user_data)
+#         return user
 
-    def post(self, user_data):
-        user = UserService.register(user_data)
-        return user
-
-@blp.route("/login")
-class UserLogin(MethodView):
-    @blp.arguments(UserSchema)
-    def post(self, user_data):
-        login = UserService.login(user_data)
-        return login
+# @blp.route("/login")
+# class UserLogin(MethodView):
+#     @blp.arguments(UserSchema)
+#     def post(self, user_data):
+#         login = UserService.login(user_data)
+#         return login
 
 
 @blp.route("/user/<int:user_id>")
