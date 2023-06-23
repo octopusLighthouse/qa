@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import axios from 'axios';
+import { Settings } from "./components/Settings";
 
 function NoMatch() {
   return (
@@ -149,6 +150,12 @@ const router = createBrowserRouter([
     loader: () => ({ message: "Hello you use CQA dashboard!" }),
     Component() {
       return <Home />;
+    },
+  },
+  {
+    path: "/settings/create",
+    Component() {
+      return <Settings />;
     },
   },
   {
