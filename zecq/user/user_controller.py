@@ -5,11 +5,11 @@ from .user_service import UserService
 import requests
 
 blp = Blueprint("users", __name__, description="Operations on users")
-AUTHENTICATION_SERVICE_URL = "http://localhost:3000/auth/123"
+#AUTHENTICATION_SERVICE_URL = "http://localhost:3000/auth/123"
 
 
 def get_permission_status():
-    response = requests.get(AUTHENTICATION_SERVICE_URL)
+    response = requests.get("http://auth:3000/auth/123")
     if response.status_code == 200:
         permission_status = response.json()["permision"]
         return permission_status
@@ -20,7 +20,7 @@ def get_permission_status():
 @blp.before_request
 def handle_authentication():
     permission_status = get_permission_status()
-    if permission_status["permission"] == "denied":
+    if permission_status == "denied":
         abort(403, message="Permission denied")
 
 
