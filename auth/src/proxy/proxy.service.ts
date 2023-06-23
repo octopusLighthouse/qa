@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateProxyDto } from './dto/create-proxy.dto';
-import { UpdateProxyDto } from './dto/update-proxy.dto';
 import axios from 'axios';
+import { IncomingHttpHeaders } from 'http';
 
 @Injectable()
 export class ProxyService {
-  async get(url: string, headers) {
+  async get(url: string, headers: IncomingHttpHeaders) {
     try {
       const response = await axios.get(url, { headers: headers });
       return response.data;
@@ -14,7 +13,7 @@ export class ProxyService {
     }
   }
 
-  async post(url: string, data, headers) {
+  async post(url: string, data, headers: IncomingHttpHeaders) {
     try {
       const response = await axios.post(url, data, { headers: headers });
       return response.data;

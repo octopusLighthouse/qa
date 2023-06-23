@@ -1,8 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Headers, Req, Res, UseGuards  } from '@nestjs/common';
 import { ProxyService } from './proxy.service';
-import { CreateProxyDto } from './dto/create-proxy.dto';
-import { UpdateProxyDto } from './dto/update-proxy.dto';
-import axios from 'axios';
 import { Request, Response } from 'express';
 import { AuthGuard } from '@nestjs/passport';
 
