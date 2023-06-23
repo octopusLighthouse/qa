@@ -18,4 +18,14 @@ export class AuthController {
   signIn(@Body() createAuthDto: CreateAuthDto) {
     return this.authService.login();
   }
+
+  @Get(':token')
+  async findAll(
+    @Param('token') token: string,
+  ) {
+    return {
+      permision: 'allowed',
+      userId: '1',
+    }
+  }
 }
