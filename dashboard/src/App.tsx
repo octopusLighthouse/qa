@@ -5,7 +5,9 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import axios from 'axios';
-import { Settings } from "./components/Settings";
+import React from 'react';
+import { Settings } from "./containers/Settings";
+import { SignIn } from "./containers/Login";
 
 function NoMatch() {
   return (
@@ -36,68 +38,17 @@ function Home() {
   );
 }
 
-function Login() {
-  const  handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    let formData = new FormData(event.currentTarget);
-    let username = formData.get("username") as string;
-    let password = formData.get("password") as string;
-
-    try {
-      const response = await axios.post('http://localhost:3000/auth/sign-in', { 
-        username,
-        password,
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  return (
-    <div className="white-page">
-      <h2>Login</h2>
-      <div className="row-box">
-        <div className="box">
-          <Link to="/login">Login</Link>
-        </div>        
-        <div className="box">
-          <Link to="/register">Register</Link>
-        </div>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className="column-box">
-          <div className="row-box">
-            <label>
-              Username: <input name="username" type="text" />
-            </label>
-          </div>
-          <div className="row-box">
-            <label>
-              Password: <input name="password" type="password" />
-            </label>
-          </div>
-          <div className="empty" />
-          <div className="row-box">
-            <button type="submit">Login</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  );
-}
-
 function Register() {
   const  handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     let formData = new FormData(event.currentTarget);
-    let username = formData.get("username") as string;
+    let email = formData.get("email") as string;
     let password = formData.get("password") as string;
 
     try {
       const response = await axios.post('http://localhost:3000/auth/sign-up', { 
-        username,
+        email,
         password,
       });
       console.log(response.data);
@@ -121,7 +72,7 @@ function Register() {
         <div className="column-box">
           <div className="row-box">
             <label>
-              Username: <input name="username" type="text" />
+              Email: <input name="email" type="text" />
             </label>
           </div>
           <div className="row-box">
@@ -167,7 +118,7 @@ const router = createBrowserRouter([
   {
     path: "/login",
     Component() {
-      return <Login />;
+      return <SignIn />;
     },
   },
   {

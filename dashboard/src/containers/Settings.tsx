@@ -9,9 +9,10 @@ export function Settings() {
       const time = formData.get("time") as string;
       const phone = formData.get("phone") as string;
       const email = formData.get("email") as string;
+      const token = formData.get("token") as string;
   
       try {
-        const response = await axios.post('http://localhost:3000/api/v1/settings', { 
+        const response = await axios.post('http://localhost:3000/api/v1/scenarios', { 
           url,
           period,
           acceptance: {
@@ -23,7 +24,7 @@ export function Settings() {
           }
         }, {
             headers: {
-                token: '2332weewioewjifwoij2io3joi2j3ioj2',
+              Authorization: `Bearer ${token}`,
             }
         });
         console.log(response.data);
@@ -37,6 +38,9 @@ export function Settings() {
         <h2>Create settings</h2>
         <form onSubmit={handleSubmit}>          
         <div className="column-box">
+        <div className="row-box">
+            Token (for testing purposes, copy it from login (sign-in) window): <input name="token" type="text" size={200} />
+          </div>
           <div className="row-box">
             url: <input name="url" type="text" />
           </div>
