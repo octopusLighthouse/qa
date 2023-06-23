@@ -1,7 +1,7 @@
 import {
     Link,
   } from "react-router-dom";
-  import "./index.css";
+  import "./containers.css";
   import axios from 'axios';
   import React, { useState } from 'react';
 
