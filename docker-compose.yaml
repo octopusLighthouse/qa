@@ -33,7 +33,8 @@ services:
             - ENV_NAME=DEV
         env_file:
             - .env
-
+        volumes:
+            - ./zecq:/app
         networks:
             - orange
 
