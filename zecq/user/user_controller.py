@@ -2,27 +2,27 @@ from flask_smorest import abort, Blueprint
 from flask.views import MethodView
 from .user_repository import UserSchema
 from .user_service import UserService
-import requests
+import jwt
+from flask import request, jsonify
+
 
 blp = Blueprint("users", __name__, description="Operations on users")
-#AUTHENTICATION_SERVICE_URL = "http://localhost:3000/auth/123"
-
-
-def get_permission_status():
-    response = requests.get("http://auth:3000/auth/123")
-    if response.status_code == 200:
-        permission_status = response.json()["permision"]
-        return permission_status
-    else:
-        abort(500, message="Failed to retrieve permission status from authentication service")
-
 
 @blp.before_request
-def handle_authentication():
-    permission_status = get_permission_status()
-    if permission_status == "denied":
-        abort(403, message="Permission denied")
+def check_authorization():
+    auth_header = request.headers.get('Authorization')
+    if auth_header:
+        try:
+            token = auth_header.split('Bearer ')[1]
+            decoded_token = jwt.decode(token, 'YOUR_SECRET_KEY', algorithms=['HS256'])
+            request.decoded_token = decoded_token
 
+        except jwt.ExpiredSignatureError:
+            return jsonify({'message': 'Token has expired'}), 401
+        except jwt.InvalidTokenError:
+            return jsonify({'message': 'Invalid token'}), 401
+    else:
+        return jsonify({'message': 'Missing Authorization header'}), 401
 
 @blp.route("/user/<int:user_id>")
 class User(MethodView):
