@@ -16,7 +16,10 @@ class ScenarioService:
             acceptance={
                 "time": settings_data["acceptance"]["time"]
             },
-            inform_channels={"email": settings_data["inform_channels"]["email"]},
+            inform_channels={
+                "email": settings_data["inform_channels"]["email"],
+                "phone": settings_data["inform_channels"]["phone"]
+            },
             user_id=settings_data["user_id"]
         )
         if not validators.url(test_settings.url):

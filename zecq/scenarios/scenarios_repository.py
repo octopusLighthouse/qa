@@ -24,6 +24,7 @@ class AcceptanceSchema(Schema):
 
 class InformChannelsSchema(Schema):
     email = fields.String()
+    phone = fields.String()
 
 class PlainScenarioSchema(Schema):
     id = fields.Str(dump_only=True)
