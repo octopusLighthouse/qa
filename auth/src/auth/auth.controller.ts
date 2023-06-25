@@ -26,7 +26,7 @@ export class AuthController {
   async findAll() {
     return {
       permision: 'allowed',
-      userId: '1',
+      userId: '2',
     }
   }
 }
