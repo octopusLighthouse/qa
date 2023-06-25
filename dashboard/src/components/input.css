@@ -26,19 +26,19 @@
 }
 
 .inputField:hover {
-    border-color: #546063;
+    border-color: #00D1FF;
     color: #546063;
 }
 
 .inputField:focus {
-    background-color: #DFFF00;
+    background-color: #E2EBED;
     color: #546063;
     outline: none;
 }
 
 .buttonField {
     margin-top: 10px;
-    border-color: #546063; 
+    border-color: #E2EBED; 
     background-color: #DFFF00;
     color: black;
     height: 38px;

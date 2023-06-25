@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Header } from '../components/header';
 
-export function Settings() {
+export function Settings222() {
     const  handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       let formData = new FormData(event.currentTarget);
