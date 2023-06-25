@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { AuthGuard } from '@nestjs/passport';
@@ -18,15 +18,13 @@ export class AuthController {
   @Post('sign-in')
   async signIn(@Body() createAuthDto: CreateAuthDto) {
     const { email, password } = createAuthDto;
-    return await this.authService.validateUser(email, password);
+    return await this.authService.login(email, password);
   }
 
   @Get()
   @UseGuards(AuthGuard('jwt'))
-  async findAll() {
-    return {
-      permision: 'allowed',
-      userId: '1',
-    }
+  async findAll(@Req() req: Request) {
+    const { headers } = req;
+    return await this.authService.jwtTokenCheck(headers);
   }
 }

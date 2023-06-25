@@ -1,10 +1,12 @@
 import {
     Link,
+    Navigate,
   } from "react-router-dom";
   import "./containers.css";
-  import axios from 'axios';
+  // import axios from 'axios';
   import React, { useState } from 'react';
 import { Header } from "../components/header";
+import { Form } from "../components/form";
 
 export function SignIn() {
     const [data, setData] = useState('');
@@ -15,15 +17,21 @@ export function SignIn() {
       let password = formData.get("password") as string;
   
       try {
-        const response = await axios.post('http://localhost:3000/auth/sign-in', { 
-          email,
-          password,
-        });
-        console.log(response.data);
-        setData(response.data.token);
+        // const response = await axios.post('http://localhost:3000/auth/sign-in', { 
+        //   email,
+        //   password,
+        // });
+        // console.log(response.data);
+        // setData(response.data.token);
+        // <Navigate to="/settings" state={{ from: location }} replace />;
+
       } catch (error) {
         console.error(error);
       }
+    }
+
+    const navigateTo = () => {
+      <Navigate to="/settings" replace />;
     }
   
     return (
@@ -44,6 +52,20 @@ export function SignIn() {
                 </div>
                 <div className="menuSepLong" />
             </div>
+
+            <div className="formBox">
+              <Form onClick={navigateTo} />
+            </div>
+
+
+
+
+
+
+
+
+
+
             <h2>Sign-In</h2>
             <div className="row-box">
             <div className="box">
