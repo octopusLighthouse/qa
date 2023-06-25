@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Header } from '../components/header';
 
 export function Settings() {
     const  handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -35,6 +36,7 @@ export function Settings() {
   
     return (
       <div className="white-page">
+        <Header />
         <h2>Create settings</h2>
         <form onSubmit={handleSubmit}>          
         <div className="column-box">

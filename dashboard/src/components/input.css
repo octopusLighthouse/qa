@@ -1,0 +1,53 @@
+.input {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 9px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    color: #546063;
+    margin-right: 20px;
+    width: 250px;
+    justify-content: left;
+}
+
+.inputField {
+    font-size: 15px;
+    border: 1px solid #E2EBED; /* Set border color to red */
+    border-radius: 10px;
+    color: #546063;
+    height: 39px;
+    font-weight: 300;
+    padding-left: 20px;
+}
+
+.inputField:hover {
+    border-color: #546063;
+    color: #546063;
+}
+
+.inputField:focus {
+    background-color: #DFFF00;
+    color: #546063;
+    outline: none;
+}
+
+.buttonField {
+    margin-top: 10px;
+    border-color: #546063; 
+    background-color: #DFFF00;
+    color: black;
+    height: 38px;
+    font-size: 14px;
+    width: 200px;
+}
+
+.buttonField:hover {
+    border-color: #DFFF00; 
+    background-color: black;
+    color: #DFFF00;
+}
