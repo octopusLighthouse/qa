@@ -8,6 +8,7 @@ import { PassportModule } from '@nestjs/passport';
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ScenariosModule } from './scenarios/scenarios.module';
 require('dotenv').config();
 
 @Module({
@@ -32,6 +33,7 @@ require('dotenv').config();
       ],
       synchronize: false,
     }),
+    ScenariosModule,
   ],
   controllers: [AppController],
   providers: [AppService],

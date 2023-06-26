@@ -11,4 +11,40 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     font-family: 'Inter', sans-serif;
     color: #FFFFFF;
+    flex-direction: row;
+    border-bottom: 3px solid #546063 ;
+}
+
+.logo {
+    margin-right: 50px;
+}
+
+.items-selected {
+    display: flex;
+    align-items: center;
+    margin-left: 19px;
+    font-size: 14px;
+    height: 70px;
+    border-bottom: 3px solid #00D1FF ;
+}
+
+.items {
+    display: flex;
+    align-items: center;
+    margin-left: 19px;
+    font-size: 14px;
+    height: 70px;
+    border-bottom: 3px solid #546063 ;
+    transition: border-color 1.9s ease;
+}
+
+.items:hover {
+    display: flex;
+    align-items: center;
+    margin-left: 19px;
+    font-size: 14px;
+    height: 70px;
+    cursor: pointer;
+    border-bottom: 3px solid lime ;
+    transition: border-color 0.5s ease;
 }

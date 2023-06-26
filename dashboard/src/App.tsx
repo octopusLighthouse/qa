@@ -8,6 +8,9 @@ import React from 'react';
 import { SignIn } from "./containers/Login";
 import { SignUp } from "./containers/Register";
 import { Home } from "./containers/home";
+import { ScenarioCreate } from "./containers/settings/settings.create";
+import { ScenarioList } from "./containers/settings/settings.list";
+import { ScenarioUpdate } from "./containers/settings/settings.update";
 
 function NoMatch() {
   return (
@@ -40,6 +43,24 @@ const router = createBrowserRouter([
     path: "/login",
     Component() {
       return <SignIn />;
+    },
+  },
+  {
+    path: "/scenarios/list",
+    Component() {
+      return <ScenarioList />;
+    },
+  },
+  {
+    path: "/scenarios/create",
+    Component() {
+      return <ScenarioCreate />;
+    },
+  },
+  {
+    path: "/scenarios/update",
+    Component() {
+      return <ScenarioUpdate />;
     },
   },
   {

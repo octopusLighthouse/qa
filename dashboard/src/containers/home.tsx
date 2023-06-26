@@ -13,7 +13,7 @@ import axios from 'axios';
   export function Home() {
     const auth = useAuth();
     if (auth.logged === false) {
-        return <Navigate to="/login" state={{ from: location }} replace />;
+        return <Navigate to="/scenarios/list" state={{ from: location }} replace />;
     }
 
     const [url, setUrl] = useState('');
@@ -72,7 +72,7 @@ import axios from 'axios';
       <div className="white-page">
         <Header />
         <div className="center-it">
-            <h2>Create settings</h2>
+            <h2>Create</h2>
             <Input label="Url" onChange={handleUrl} value={url} />
             <Input label="Period" onChange={handlePeriod} value={period} />
             <Input label="Time" onChange={handleTime} value={time} />

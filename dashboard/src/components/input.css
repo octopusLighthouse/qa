@@ -36,7 +36,7 @@
     outline: none;
 }
 
-.buttonField {
+.buttonField2 {
     margin-top: 10px;
     border-color: #E2EBED; 
     background-color: #DFFF00;
@@ -46,7 +46,7 @@
     width: 200px;
 }
 
-.buttonField:hover {
+.buttonField2:hover {
     border-color: #DFFF00; 
     background-color: black;
     color: #DFFF00;

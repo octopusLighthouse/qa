@@ -19,17 +19,19 @@
 
 .buttonField {
     margin-top: 10px;
-    border-color: #E2EBED; 
-    background-color: #00D1FF;
-    color: rgb(255, 255, 255);
+    border-color: #00D1FF; 
+    background-color: #ffffff;
+    color: #00D1FF;
     height: 38px;
     font-size: 14px;
     width: 200px;
     align-items:start;
+    transition: background-color 2.0s;
 }
 
 .buttonField:hover {
     border-color: #00D1FF; 
-    background-color: #128ca7;
-    color: #fdfdf8;
+    background-color: #36daff;
+    color: #f7f7f7;
+    transition: background-color 1.9s;
 }
