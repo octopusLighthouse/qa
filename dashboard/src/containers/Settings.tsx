@@ -7,7 +7,7 @@ export function Settings222() {
       let formData = new FormData(event.currentTarget);
       const url = formData.get("url") as string;
       const period = formData.get("period") as string;
-      const time = formData.get("time") as string;
+      const time = (formData.get("time") as string);
       const phone = formData.get("phone") as string;
       const email = formData.get("email") as string;
       const token = formData.get("token") as string;

@@ -24,7 +24,8 @@ export class ProxyController {
   async proxyPostRequest(@Req() req: Request) {
     const { url, headers, body } = req;
     const urlToSubServis = `http://zecq:5000/${url?.substring('/api/v1/'.length)}`;
-    console.log(`Call to sub servis to url (POST): ${urlToSubServis}`);
+    console.log(`Call to sub service to url (POST): ${urlToSubServis}`);
+    console.log(`Data to service: ${JSON.stringify(body)}`);
     return await this.proxyService.post(
       urlToSubServis,
       body,

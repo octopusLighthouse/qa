@@ -17,8 +17,8 @@ import axios from 'axios';
     }
 
     const [url, setUrl] = useState('');
-    const [period, setPeriod] = useState('');
-    const [time, setTime] = useState('');
+    const [period, setPeriod] = useState(0);
+    const [time, setTime] = useState(0);
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     let navigate = useNavigate();
@@ -28,11 +28,11 @@ import axios from 'axios';
     };
 
     const handlePeriod = (event: any) => {
-        setPeriod(event.target.value);
+        setPeriod(parseInt(event?.target?.value || 0));
     };
 
     const handleTime = (event: any) => {
-        setTime(event.target.value);
+        setTime(parseInt(event?.target?.value || 0));
     };
 
     const handlePhone = (event: any) => {
@@ -73,15 +73,12 @@ import axios from 'axios';
         <Header />
         <div className="center-it">
             <h2>Create settings</h2>
-
             <Input label="Url" onChange={handleUrl} value={url} />
             <Input label="Period" onChange={handlePeriod} value={period} />
             <Input label="Time" onChange={handleTime} value={time} />
             <Input label="Phone" onChange={handlePhone} value={phone} />
             <Input label="Email" onChange={handleEmail} value={email} />
-
             <Button label="Create"  onClick={clickForm} />
-            
         </div>
       </div>
     );
