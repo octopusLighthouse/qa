@@ -1,10 +1,10 @@
 from flask.views import MethodView
 from .scenarios_repository import ScenarioSchema, ScenarioModel
 from flask_smorest import abort, Blueprint
-from .scenarios_service import ScenarioService
+from .scenarios_service import ScenarioService, ScenarioDTO
 import jwt
 from flask import request, jsonify, g
-
+from marshmallow import ValidationError
 blp = Blueprint("scenarios", __name__, description="Operations on scenarios")
 
 
@@ -27,16 +27,53 @@ def check_authorization():
 
 
 @blp.route("/scenarios")
+# class Scenarios(MethodView):
+#     @blp.arguments(ScenarioSchema)
+#     @blp.response(200, ScenarioSchema)
+#     def post(self, settings_data):
+#         updated_settings = ScenarioService.create(settings_data)
+#         return updated_settings
 class Scenarios(MethodView):
     @blp.arguments(ScenarioSchema)
     @blp.response(200, ScenarioSchema)
     def post(self, settings_data):
-        updated_settings = ScenarioService.create(settings_data)
-        return updated_settings
 
+        dto = ScenarioDTO(
+            url=settings_data["url"],
+            period=settings_data["period"],
+            acceptance_time=settings_data["acceptance"]["time"],
+            email=settings_data["informChannels"]["email"],
+            phone=settings_data["informChannels"]["phone"]
+        )
+        updated_settings = ScenarioService.create(dto)
+        return updated_settings
 
 @blp.route("/scenarios")
 class SettingsList(MethodView):
     @blp.response(200, ScenarioSchema(many=True))
     def get(self):
         return ScenarioService.get_all()
+
+
+
+@blp.errorhandler(ValidationError)
+def handle_validation_error(error):
+    print('Validation error:', error.messages)
+
+    response = jsonify({
+        'message': 'Validation error',
+        'errors': error.messages
+    })
+    response.status_code = 422
+    return response
+
+@blp.errorhandler(Exception)
+def handle_exception(error):
+    print('An error occurred:', str(error))
+
+    response = jsonify({
+        'message': 'An error occurred',
+        'error': str(error)
+    })
+    response.status_code = 500
+    return response
