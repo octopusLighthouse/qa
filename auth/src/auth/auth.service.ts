@@ -3,6 +3,7 @@ import { CreateAuthDto } from './dto/create-auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
+import { UserService } from 'src/user/user.service';
 
 enum Role {
   MASTER = 'master',
@@ -26,7 +27,9 @@ class User {
 @Injectable()
 export class AuthService {
   private systemUsers: User[] = [];  
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly jwtService: JwtService) {}
 
   async hashing(password: string): Promise<string> {
     try {
@@ -37,7 +40,11 @@ export class AuthService {
   }
 
   async register(createAuthDto: CreateAuthDto) {
-    if (this.systemUsers.some(user => user.email === createAuthDto.email)) {
+
+    const providedUser = await this.userService.getOneByEmail(createAuthDto.email);
+    console.log(JSON.stringify(providedUser));
+
+    if (providedUser) {
       throw new Error('user error');
     }
 
@@ -49,30 +56,27 @@ export class AuthService {
       hash: hashedPassword,
       role: Role.MASTER,
     });
-    this.systemUsers.push(user);
+    await this.userService.create(user);
 
     console.table(this.systemUsers);
     return {};
   }
 
   async login(email: string, password: string) {
-    const user: User | undefined = this.systemUsers.find(user => user.email === email);
-    if (!user) throw new Error('user exist error');
-    const hh = await this.hashing(password);
-    console.log(`Hash existed in db: ${user.passwordHash}, Hashed on check: ${hh}`);
-    // if (user.passwordHash !== await this.hashing(password)) throw new Error('user hash error');
-
-    if (!await(bcrypt.compare(password, user.passwordHash))) throw new Error(`bsc`);
-
-    const token = await this.generateToken(user);
+    const providedUser = await this.userService.getOneByEmail(email);
+    if (!providedUser) {
+      throw new Error('user error');
+    }
+    
+    if (!await(bcrypt.compare(password, providedUser.passwordHash))) throw new Error(`bsc`);
+    const token = await this.generateToken(providedUser.id);
     return {
       token,
     };
   }
 
-  async generateToken(user: User): Promise<string> {
-    console.log(JSON.stringify(user));
-    return await this.jwtService.signAsync({ id: user.id });
+  async generateToken(userId: string): Promise<string> {
+    return await this.jwtService.signAsync({ id: userId });
   }
 
   async jwtTokenCheck(token) {

@@ -1,11 +1,20 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('path/to/font/Inter-Regular.woff2') format('woff2'),
+       url('path/to/font/Inter-Regular.woff') format('woff'),
+       url('path/to/font/Inter-Regular.ttf') format('truetype');
+  /* Add additional font weights and styles if needed */
+}
+
 .white-page {
-  background-color:rgb(241, 238, 233);
+  background-color:rgb(255, 255, 255);
   font-size: 2.2em;
   line-height: 1.1;
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100%;
+  margin: 0;
 }
 
 .container {
@@ -49,7 +58,7 @@
   height: 50px;
   align-items: center;
   justify-content: center;
-  border-bottom: solid 5px #DFFF00;
+  border-bottom: solid 2px #00CCFF;
 }
 
 .menuSep {
@@ -82,8 +91,8 @@
 }
 
 .empty {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .murza {
@@ -126,6 +135,7 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 0;
 }
 
 h1 {
