@@ -3,9 +3,14 @@
   src: url('path/to/font/Inter-Regular.woff2') format('woff2'),
        url('path/to/font/Inter-Regular.woff') format('woff'),
        url('path/to/font/Inter-Regular.ttf') format('truetype');
+
   /* Add additional font weights and styles if needed */
 }
-
+@font-face {
+  font-family: 'Raleway';
+  src: url('../fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
+  /* Add additional font weights and styles if needed */
+}
 .white-page {
   background-color:rgb(255, 255, 255);
   font-size: 2.2em;

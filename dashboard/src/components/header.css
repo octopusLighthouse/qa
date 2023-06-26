@@ -1,15 +1,15 @@
 .main {
     margin: 0;
     display: flex;
-    background-color: #546063;
+    background-color: #006983;
     width: 100%;
     height: 70px;
     padding-left: 100px;
     padding-right: 100px;
     align-items: center;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-    font-family: 'Inter', sans-serif;
+    font-weight: 250;
+    text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    font-family: 'Raleway', sans-serif;
     color: #FFFFFF;
     flex-direction: row;
     border-bottom: 3px solid #546063 ;
