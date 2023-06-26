@@ -8,9 +8,9 @@ interface UserCreate {
 	role: string;
 }
 
-@Entity()
+@Entity('users')
 export class User {
-	@PrimaryColumn({ length: 30 })
+	@PrimaryColumn({ length: 255 })
 	id: string;
 
 	@Column({ length: 255 })
@@ -26,7 +26,7 @@ export class User {
 	createdAt: Date;
 
 	constructor(data: UserCreate) {
-		this.id = uuidv4();
+		this.id = `${uuidv4()}`.substring(0, 30);
 		this.email = data?.email;
 		this.passwordHash = data?.passwordHash;
 		this.role = data?.role;

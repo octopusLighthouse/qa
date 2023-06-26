@@ -1,10 +1,10 @@
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { Pagination } from '../common/pagination';
+// import { Pagination } from '../common/pagination';
 import { userQueryFilterDto } from './dto/request/user.query.filter.dto';
 
-export class userRepository extends Repository<User> {
+export class UserRepository extends Repository<User> {
 	constructor(
 		@InjectRepository(User)
 		private userRepository: Repository<User>
@@ -12,33 +12,37 @@ export class userRepository extends Repository<User> {
 		super(userRepository.target, userRepository.manager, userRepository.queryRunner);
 	}
 	
-	async getuser(id: string) {
-		return await this.userRepository.findBy({ id });
+	async getUser(id: string) {
+		return await this.userRepository.findOneBy({ id });
 	}
-	
-	async getusers(
-		pagination: Pagination,
-		filter: userQueryFilterDto,
-	) {
-		const query = this.userRepository
-			.createQueryBuilder('user')
 
-		return await query
-			.limit(pagination.getPageSize())
-			.offset(pagination.getSkip())
-			.getManyAndCount();
+	async getByEmail(email: string) {
+		return await this.userRepository.findOneBy({ email });
 	}
 	
-	async updateuser(id: string, data: User) {
-		return await this.userRepository.update({ id }, data);
-	}
+	// async getusers(
+	// 	pagination: Pagination,
+	// 	filter: userQueryFilterDto,
+	// ) {
+	// 	const query = this.userRepository
+	// 		.createQueryBuilder('user')
+
+	// 	return await query
+	// 		.limit(pagination.getPageSize())
+	// 		.offset(pagination.getSkip())
+	// 		.getManyAndCount();
+	// }
 	
-	async createuser(data: User) {
+	// async updateuser(id: string, data: User) {
+	// 	return await this.userRepository.update({ id }, data);
+	// }
+	
+	async createUser(data: User) {
 		return await this.userRepository.save(data);
 	}
 	
-	async deleteuser(id: string) {
-		return await this.userRepository.delete({ id });
-	}
+	// async deleteuser(id: string) {
+	// 	return await this.userRepository.delete({ id });
+	// }
 	
 }

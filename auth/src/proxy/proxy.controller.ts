@@ -11,8 +11,10 @@ export class ProxyController {
   @UseGuards(AuthGuard('jwt'))
   async proxyGetRequest(@Req() req: Request) {
     const { url, headers } = req;
+    const urlToSubServis = `http://zecq:5000/${url?.substring('/api/v1/'.length)}`;
+    console.log(`Call to sub servis to url (GET): ${urlToSubServis}`);
     return await this.proxyService.get(
-      `http://zecq:5000/${url?.substring('/api/v1/'.length)}`,
+      urlToSubServis,
       headers,
     );
   }
@@ -21,8 +23,10 @@ export class ProxyController {
   @UseGuards(AuthGuard('jwt'))
   async proxyPostRequest(@Req() req: Request) {
     const { url, headers, body } = req;
+    const urlToSubServis = `http://zecq:5000/${url?.substring('/api/v1/'.length)}`;
+    console.log(`Call to sub servis to url (POST): ${urlToSubServis}`);
     return await this.proxyService.post(
-      `http://zecq:5000/${url?.substring('/api/v1/'.length)}`,
+      urlToSubServis,
       body,
       headers,
     );    
