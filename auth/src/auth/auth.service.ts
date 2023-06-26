@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import { UserService } from 'src/user/user.service';
+import { User } from 'src/user/entities/user.entity';
 
 enum Role {
   MASTER = 'master',
@@ -11,18 +12,18 @@ enum Role {
   USER = 'user',
 }
 
-class User {
-  id: string;
-  email: string;
-  passwordHash: string;
-  role: string;
-  constructor(auth: {email: string, hash: string, role: Role}) {
-    this.id = uuidv4();
-    this.email = auth.email;
-    this.passwordHash = auth.hash;
-    this.role = auth.role;
-  }
-}
+// class User {
+//   id: string;
+//   email: string;
+//   passwordHash: string;
+//   role: string;
+//   constructor(auth: {email: string, hash: string, role: Role}) {
+//     this.id = uuidv4();
+//     this.email = auth.email;
+//     this.passwordHash = auth.hash;
+//     this.role = auth.role;
+//   }
+// }
 
 @Injectable()
 export class AuthService {
@@ -48,12 +49,12 @@ export class AuthService {
       throw new Error('user error');
     }
 
-    const hashedPassword = await this.hashing(createAuthDto.password);
-    console.log(`Password ${createAuthDto.password} hash is ${hashedPassword}.`);
+    const passwordHash = await this.hashing(createAuthDto.password);
+    console.log(`Password ${createAuthDto.password} hash is ${passwordHash}.`);
 
     const user = new User({
       email: createAuthDto.email,
-      hash: hashedPassword,
+      passwordHash,
       role: Role.MASTER,
     });
     await this.userService.create(user);
@@ -82,13 +83,12 @@ export class AuthService {
   async jwtTokenCheck(token) {
     try {
       const decoded = this.jwtService.verify(token['authorization']?.split(' ')[1]);
-      const user: User | undefined = this.systemUsers.find(user => user.id === decoded.id);
+      const user: User = await this.userService.getOne(decoded.id);
 
       if (!user) throw new Error('no such user');
       return {
         permision: 'allowed',
         userId: user.id,
-        email: user.email,
         role: user.role,
       }
 
