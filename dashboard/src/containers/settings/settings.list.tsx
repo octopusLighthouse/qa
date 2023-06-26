@@ -1,10 +1,10 @@
 import {
-    useNavigate,
+    // useNavigate,
     Link,
 } from "react-router-dom";
 import "./scenarios.list.css";
 import { useEffect, useState } from "react";
-import axios from 'axios';
+// import axios from 'axios';
 import { useAuth } from "../../App";
 import { Header } from "../../components/header";
   
@@ -24,7 +24,7 @@ import { Header } from "../../components/header";
     return urls[Math.floor(Math.random() * urls.length)];
   };
 
-  const generateRandomNumber = (min, max) => {
+  const generateRandomNumber = (min: any, max: any) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
