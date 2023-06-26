@@ -18,6 +18,9 @@ services:
 
         environment: 
             - TEST=true
+
+        env_file:
+            - .env
         networks:
             - orange
 
