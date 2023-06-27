@@ -33,7 +33,7 @@ export function SignIn() {
           const token: string = response.data.token;
           auth.token = token;
           auth.logged = true;
-          navigate("/");
+          navigate("/scenarios/list");
 
       } catch (error) {
           console.error(error);
