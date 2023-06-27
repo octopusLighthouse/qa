@@ -17,10 +17,10 @@ export class ProxyController {
   ) {
     const { url, headers, query } = req;
     const providedModule = `${url?.substring('/api/v1/'.length)}`;
-    const urlToSubServis = `http://zecq:5000/${providedModule}?${query}`;
+    const urlToSubServis = `http://zecq:5000/${providedModule}`;
     console.log(`Call to sub servis to url (GET): ${urlToSubServis}`);
 
-    if (providedModule === 'test') {
+    if (providedModule.includes('test')) {
       return generateFakeData(2000, page, pageSize, JSON.stringify(query));
     }
 
@@ -34,7 +34,7 @@ export class ProxyController {
   @UseGuards(AuthGuard('jwt'))
   async proxyPostRequest(@Req() req: Request) {
     const { url, headers, body, query } = req;
-    const urlToSubServis = `http://zecq:5000/${url?.substring('/api/v1/'.length)}?${query}`;
+    const urlToSubServis = `http://zecq:5000/${url?.substring('/api/v1/'.length)}`;
     console.log(`Call to sub service to url (POST): ${urlToSubServis}`);
     console.log(`Data to service: ${JSON.stringify(body)}`);
     return await this.proxyService.post(
