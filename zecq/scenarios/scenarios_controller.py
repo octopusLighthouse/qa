@@ -1,7 +1,8 @@
 from flask.views import MethodView
 from .scenarios_repository import PlainScenarioSchema, ScenarioModel
 from flask_smorest import abort, Blueprint
-from .scenarios_service import ScenarioService, ScenarioDTO
+from .scenarios_service import ScenarioService
+from dto.dto import ScenarioDTO
 import jwt
 from flask import request, jsonify, g
 from marshmallow import ValidationError

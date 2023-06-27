@@ -1,4 +1,4 @@
-from .scenarios_repository import ScenarioModel, ScenarioSchema
+from .scenarios_repository import ScenarioModel, PlainScenarioSchema
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError, ProgrammingError, DataError
 from flask import jsonify, g
 from flask_smorest import abort
@@ -7,13 +7,6 @@ import json
 from db import db
 
 
-class ScenarioDTO:
-    def __init__(self, url, period, acceptance_time, email, phone):
-        self.url = url
-        self.period = period
-        self.acceptance_time = acceptance_time
-        self.email = email
-        self.phone = phone
 
 
 # class ScenarioService:
