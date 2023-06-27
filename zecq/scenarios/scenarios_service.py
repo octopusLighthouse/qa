@@ -3,10 +3,7 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError, ProgrammingError, Da
 from flask import jsonify, g
 from flask_smorest import abort
 import validators
-import json
 from db import db
-
-
 
 
 # class ScenarioService:
@@ -20,26 +17,7 @@ from db import db
 #             phone=settings_data["phone"],
 #             user_id=g.user_id
 #         )
-#         if not validators.url(test_settings.url):
-#             abort(404, message="URL is not valid or doesn't exist")
-#         try:
-#             db.session.add(test_settings)
-#             db.session.commit()
-#         except IntegrityError as error:
-#             db.session.rollback()
-#             error_message = str(error.orig)
-#             return jsonify(message="An integrity error occurred", error=error_message), 500
-#         except ProgrammingError as error:
-#             db.session.rollback()
-#             error_message = str(error.orig)
-#             return jsonify(message="A programming error occurred", error=error_message), 500
-#         except DataError as error:
-#             db.session.rollback()
-#             error_message = str(error.orig)
-#             return jsonify(message="A Data error occurred", error=error_message), 500
-#         except SQLAlchemyError as error:
-#             abort(500, message=error)
-#         return test_settings
+
 class ScenarioService:
     @staticmethod
     def create(dto):
@@ -73,5 +51,8 @@ class ScenarioService:
         return test_settings
 
     @staticmethod
-    def get_all():
-        return ScenarioModel.query.all()
+    def get_all(page, page_size):
+        query = ScenarioModel.query.filter_by(user_id=g.user_id)
+        scenarios = query.paginate(page=page, per_page=page_size)
+
+        return scenarios.items, scenarios.pages

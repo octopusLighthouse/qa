@@ -2,7 +2,7 @@ from flask.views import MethodView
 from .scenarios_repository import PlainScenarioSchema, ScenarioModel
 from flask_smorest import abort, Blueprint
 from .scenarios_service import ScenarioService
-from dto.dto import ScenarioDTO
+from .dto.dto import ScenarioDTO
 import jwt
 from flask import request, jsonify, g
 from marshmallow import ValidationError
@@ -17,7 +17,7 @@ def check_authorization():
             token = auth_header.split('Bearer ')[1]
             decoded_token = jwt.decode(token, 'YOUR_SECRET_KEY', algorithms=['HS256'])
             request.decoded_token = decoded_token
-            g.user_id = int(decoded_token.get('userId'))
+            g.user_id = decoded_token.get('id')
 
         except jwt.ExpiredSignatureError:
             return jsonify({'message': 'Token has expired'}), 401
@@ -28,12 +28,6 @@ def check_authorization():
 
 
 @blp.route("/scenarios")
-# class Scenarios(MethodView):
-#     @blp.arguments(ScenarioSchema)
-#     @blp.response(200, ScenarioSchema)
-#     def post(self, settings_data):
-#         updated_settings = ScenarioService.create(settings_data)
-#         return updated_settings
 class Scenarios(MethodView):
     @blp.arguments(PlainScenarioSchema)
     @blp.response(200, PlainScenarioSchema)
@@ -45,9 +39,22 @@ class Scenarios(MethodView):
 
 @blp.route("/scenarios")
 class ScenariosList(MethodView):
-    @blp.response(200, PlainScenarioSchema(many=True))
+    #@blp.response(200, PlainScenarioSchema(many=True))
     def get(self):
-        return ScenarioService.get_all()
+        page = int(request.args.get('page', 1))
+        page_size = int(request.args.get('pageSize', 100))
+        scenarios, total_pages = ScenarioService.get_all(page, page_size)
+        serialized_scenarios = PlainScenarioSchema(many=True).dump(scenarios)
+
+        response = {
+            'data': serialized_scenarios,
+            'page': page,
+            'pageSize': page_size,
+            'count': total_pages,
+            'id': g.user_id
+        }
+
+        return response
 
 
 
