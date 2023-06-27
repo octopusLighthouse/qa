@@ -1,5 +1,6 @@
 import {
     // useNavigate,
+    Navigate,
     Link,
 } from "react-router-dom";
 import "./scenarios.list.css";
@@ -11,14 +12,14 @@ import { Header } from "../../components/header";
   export function ScenarioList() {
     const auth = useAuth();
     if (auth.logged === false) {
-        // return <Navigate to="/login" state={{ from: location }} replace />;
+      return <Navigate to="/login" state={{ from: location }} replace />;
     }
 
     const [data, setData] = useState<any>(null);
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get('http://localhost:3000/api/v1/test', {
+            const response = await axios.get('http://localhost:3000/api/v1/test?page1&pageSize=50', {
               headers: {
                 Authorization: `Bearer ${auth.token}`,
               }
