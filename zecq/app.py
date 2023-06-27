@@ -5,7 +5,6 @@ from db import db
 from dotenv import load_dotenv
 from config import app_config
 from scenarios import ScenarioBlueprint
-from user import UserBlueprint
 from flask_migrate import Migrate
 
 
@@ -21,6 +20,5 @@ def create_app():
     api = Api(app)
 
     api.register_blueprint(ScenarioBlueprint)
-    api.register_blueprint(UserBlueprint)
 
     return app

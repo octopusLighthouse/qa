@@ -13,8 +13,9 @@ class ScenarioModel(db.Model):
     email = db.Column(db.String)
     phone = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.now)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    user = db.relationship("UserModel", back_populates="scenarios")
+    user_id = db.Column(db.Integer)
+    #user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    #user = db.relationship("UserModel", back_populates="scenarios")
 
 
 # class PlainScenarioSchema(Schema):
@@ -30,25 +31,21 @@ class ScenarioModel(db.Model):
 # class ScenarioSchema(PlainScenarioSchema):
 #     user_id = fields.Int(load_only=True)
 
-class AcceptanceSchema(Schema):
-    time = fields.Int(required=True)
-
-class ChannelsSchema(Schema):
-    email = fields.Str(allow_none=True)
-    phone = fields.Str(allow_none=True)
 
 
 class PlainScenarioSchema(Schema):
     id = fields.Str(dump_only=True)
     url = fields.Str(required=True)
     period = fields.Int(required=True)
-    acceptance = fields.Nested(AcceptanceSchema(), required=True)
-    informChannels = fields.Nested(ChannelsSchema(), required=True)
-    created_at = fields.String(dump_only=True)
+    acceptance_time = fields.Int(required=True)
+    email = fields.Str()
+    phone = fields.Str()
+
+    created_at = fields.Str(dump_only=True)
 
 
-class ScenarioSchema(PlainScenarioSchema):
-    user_id = fields.Int(load_only=True)
+# class ScenarioSchema(PlainScenarioSchema):
+#     user_id = fields.Int(load_only=True)
 
 
 

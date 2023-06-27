@@ -1,5 +1,5 @@
 from flask.views import MethodView
-from .scenarios_repository import ScenarioSchema, ScenarioModel
+from .scenarios_repository import PlainScenarioSchema, ScenarioModel
 from flask_smorest import abort, Blueprint
 from .scenarios_service import ScenarioService, ScenarioDTO
 import jwt
@@ -34,23 +34,17 @@ def check_authorization():
 #         updated_settings = ScenarioService.create(settings_data)
 #         return updated_settings
 class Scenarios(MethodView):
-    @blp.arguments(ScenarioSchema)
-    @blp.response(200, ScenarioSchema)
-    def post(self, settings_data):
+    @blp.arguments(PlainScenarioSchema)
+    @blp.response(200, PlainScenarioSchema)
+    def post(self, scenario_data):
 
-        dto = ScenarioDTO(
-            url=settings_data["url"],
-            period=settings_data["period"],
-            acceptance_time=settings_data["acceptance"]["time"],
-            email=settings_data["informChannels"]["email"],
-            phone=settings_data["informChannels"]["phone"]
-        )
+        dto = ScenarioDTO(**scenario_data)
         updated_settings = ScenarioService.create(dto)
         return updated_settings
 
 @blp.route("/scenarios")
-class SettingsList(MethodView):
-    @blp.response(200, ScenarioSchema(many=True))
+class ScenariosList(MethodView):
+    @blp.response(200, PlainScenarioSchema(many=True))
     def get(self):
         return ScenarioService.get_all()
 

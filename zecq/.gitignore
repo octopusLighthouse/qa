@@ -1,3 +1,4 @@
 ../.env
 .idea
 *.pyc
+zecq/__pycache__/
