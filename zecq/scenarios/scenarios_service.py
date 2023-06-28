@@ -53,6 +53,7 @@ class ScenarioService:
     @staticmethod
     def get_all(page, page_size):
         query = ScenarioModel.query.filter_by(user_id=g.user_id)
+        total_count = query.count()
         scenarios = query.paginate(page=page, per_page=page_size)
 
-        return scenarios.items, scenarios.pages
+        return scenarios.items, total_count

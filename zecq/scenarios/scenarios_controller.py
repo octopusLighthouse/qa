@@ -6,6 +6,7 @@ from .dto.dto import ScenarioDTO
 import jwt
 from flask import request, jsonify, g
 from marshmallow import ValidationError
+
 blp = Blueprint("scenarios", __name__, description="Operations on scenarios")
 
 
@@ -44,15 +45,14 @@ class ScenariosList(MethodView):
         page = int(request.args.get('page', 1))
         page_size = int(request.args.get('pageSize', 100))
         sort_field = request.args.get('sort', 'id')
-        scenarios, total_pages = ScenarioService.get_all(page, page_size)
+        scenarios, total_count = ScenarioService.get_all(page, page_size)
         serialized_scenarios = PlainScenarioSchema(many=True).dump(scenarios)
 
         response = {
             'data': serialized_scenarios,
             'page': page,
             'pageSize': page_size,
-            'count': total_pages,
-            #'id': g.user_id
+            'count': total_count,
         }
 
         return response

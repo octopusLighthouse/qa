@@ -1,8 +1,8 @@
 from db import db
 import uuid
 from datetime import datetime
-from marshmallow import Schema, fields, ValidationError
-from flask import jsonify
+from marshmallow import Schema, fields
+
 class ScenarioModel(db.Model):
     __tablename__ = "scenarios"
 
@@ -18,34 +18,16 @@ class ScenarioModel(db.Model):
     #user = db.relationship("UserModel", back_populates="scenarios")
 
 
-# class PlainScenarioSchema(Schema):
-#     id = fields.Str(dump_only=True)
-#     url = fields.Str(required=True)
-#     period = fields.Int(required=True)
-#     acceptance_time = fields.Int(required=True)
-#     email = fields.String()
-#     phone = fields.String()
-#     created_at = fields.String(dump_only=True)
-#
-#
-# class ScenarioSchema(PlainScenarioSchema):
-#     user_id = fields.Int(load_only=True)
-
-
-
 class PlainScenarioSchema(Schema):
     id = fields.Str(dump_only=True)
     url = fields.Str(required=True)
     period = fields.Int(required=True)
-    acceptance_time = fields.Int(required=True)
+    acceptance_time = fields.Int(data_key='acceptanceTime', attribute='acceptance_time', required=True)
     email = fields.Str()
     phone = fields.Str()
-    created_at = fields.Str(dump_only=True)
-    user_id = fields.Str(dump_only=True)
+    created_at = fields.Str(data_key='createdAt', attribute='created_at', dump_only=True)
+    user_id = fields.Str(data_key='userId', attribute='user_id', dump_only=True)
 
-
-# class ScenarioSchema(PlainScenarioSchema):
-#     user_id = fields.Int(load_only=True)
 
 
 
