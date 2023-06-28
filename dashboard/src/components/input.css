@@ -13,6 +13,19 @@
     margin-right: 20px;
     width: 250px;
     justify-content: left;
+    transition: color 1.0s ease-in;
+}
+
+.title:hover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    color: #00D1FF;
+    margin-right: 20px;
+    width: 250px;
+    justify-content: left;
+    transition: color 1.0s ease;
 }
 
 .inputField {
