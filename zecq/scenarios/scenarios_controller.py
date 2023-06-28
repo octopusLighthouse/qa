@@ -43,6 +43,7 @@ class ScenariosList(MethodView):
     def get(self):
         page = int(request.args.get('page', 1))
         page_size = int(request.args.get('pageSize', 100))
+        sort_field = request.args.get('sort', 'id')
         scenarios, total_pages = ScenarioService.get_all(page, page_size)
         serialized_scenarios = PlainScenarioSchema(many=True).dump(scenarios)
 
@@ -51,7 +52,7 @@ class ScenariosList(MethodView):
             'page': page,
             'pageSize': page_size,
             'count': total_pages,
-            'id': g.user_id
+            #'id': g.user_id
         }
 
         return response
