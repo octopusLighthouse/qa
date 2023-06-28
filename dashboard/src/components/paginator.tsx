@@ -34,7 +34,7 @@ export function Paginator(props: any) {
 
     const renderRepeatedDivs = () => {
         const divs = [];
-        for (let i = 0; i < (props.pages/props.pageSize); i++) {
+        for (let i = 0; i < (props.totalItems/props.pageSize); i++) {
 
             const linkFormed = `${props.base}page=${i+1}&pageSize=${props.pageSize}`;
             if (props.page === i+1)

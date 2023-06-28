@@ -44,9 +44,11 @@ export function SignIn() {
     <div className="white-page">
       <Header />
       <div className="center-it">
-          <Input label="Email" onChange={handleEmail} value={email} />
-          <Input label="Password" onChange={handlePassword} value={password} password />
+        <div className="container-items-rigth">
+          <Input label="Email" onChange={handleEmail} value={email} type="edit" />
+          <Input label="Password" onChange={handlePassword} value={password} type="password" />
           <Button label="Sign In"  onClick={clickForm} />
+        </div>
       </div>
     </div>
   );

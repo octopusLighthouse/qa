@@ -105,7 +105,7 @@ import { Paginator } from "../../components/paginator";
                 // Render loading or fallback UI
                 <div>Loading...</div>
                 )}
-                <Paginator page={page} pages={data?.count || 1} base='http://localhost/scenarios/list?' pageSize={pageSize} />
+                <Paginator page={page} totalItems={data?.count || 1} base='http://localhost/scenarios/list?' pageSize={pageSize} />
             </div>
         </div>
       </div>

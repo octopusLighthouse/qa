@@ -11,6 +11,13 @@
     padding-right: 100px;
 }
 
+.container-items-rigth {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+}
+
 .center-horizontal {
     display: flex;
     flex-direction: column;

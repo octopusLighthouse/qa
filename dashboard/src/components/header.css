@@ -12,7 +12,7 @@
     font-family: 'Raleway', sans-serif;
     color: #FFFFFF;
     flex-direction: row;
-    border-bottom: 3px solid #546063 ;
+    border-bottom: 0px solid #546063 ;
 }
 
 .logo {
@@ -23,28 +23,28 @@
     display: flex;
     align-items: center;
     margin-left: 19px;
-    font-size: 14px;
+    font-size: 18px;
     height: 70px;
-    border-bottom: 3px solid #00D1FF ;
+    border-bottom: 7px solid #00D1FF ;
 }
 
 .items {
     display: flex;
     align-items: center;
     margin-left: 19px;
-    font-size: 14px;
+    font-size: 18px;
     height: 70px;
-    border-bottom: 3px solid #546063 ;
-    transition: border-color 1.9s ease;
+    border-bottom: 7px solid #088395 ;
+    transition: border-color 1.0s ease;
 }
 
 .items:hover {
     display: flex;
     align-items: center;
     margin-left: 19px;
-    font-size: 14px;
+    font-size: 18px;
     height: 70px;
     cursor: pointer;
-    border-bottom: 3px solid lime ;
-    transition: border-color 0.5s ease;
+    border-bottom: 7px solid lime ;
+    transition: border-color 0.3s ease;
 }

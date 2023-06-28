@@ -1,6 +1,7 @@
 .groud {
     display: flex;
     flex-direction: row;
+    margin-top: 20px;
     margin-bottom: 9px;
     align-items: flex-start;
     justify-content: end;
@@ -31,7 +32,7 @@
 
 .buttonField:hover {
     border-color: #00D1FF; 
-    background-color: #36daff;
-    color: #f7f7f7;
-    transition: background-color 1.9s;
+    background-color: #d3f7ff;
+    color: #00D1FF;
+    transition: background-color 1.0s;
 }
