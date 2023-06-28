@@ -1,0 +1,71 @@
+.paginator-main {
+    width: 100%;
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 1px solid rgb(255, 255, 255);
+    align-items: center;
+    color: rgb(91, 104, 129);
+    white-space: nowrap;
+}
+
+.paginator-pages {
+    margin-left: 10px;
+    border: 1px solid rgb(226, 226, 226);
+    padding: 6px;
+    cursor: pointer;
+}
+
+.paginator-pages-selected {
+    margin-left: 10px;
+    border: 1px solid rgb(95, 186, 255);
+    padding: 6px;
+    cursor: pointer;
+}
+
+.paginator-splitter {
+    width: 100%;
+}
+
+.paginator-spacer {
+    width: 10px;
+}
+
+.pagination-buble {
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(255, 255, 255);
+    color: rgb(46, 54, 70);
+}
+
+.pagination-buble-selected {
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(95, 186, 255);
+    color: rgb(46, 54, 70);
+}
+
+.pagination-buble:hover {
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(116, 151, 167);
+    color: rgb(46, 54, 70);
+    cursor: pointer;
+}
